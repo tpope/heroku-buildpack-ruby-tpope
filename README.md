@@ -20,10 +20,7 @@ version, distilled from project-specific buildpacks I've created in the past.
 ## Custom compilation tasks
 
 If the `COMPILE_TASKS` config variable is set, it will be passed verbatim to a
-`rake` invocation.  The `user-env-compile` Heroku labs feature is required in
-order for this to work.
-
-    heroku labs:enable user-env-compile
+`rake` invocation.
 
 You can use this for all sorts of things.  My favorite is `db:migrate`.
 
