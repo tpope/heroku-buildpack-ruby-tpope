@@ -68,6 +68,8 @@ theory, but it in practice, boy does this make things a whole lot simpler.
 
 ## Commit recording
 
+**Broken and disabled pending further investigation.**
+
 This takes the upcoming and previously deployed commit SHAs and makes them
 available as `$REVISION` and `$ORIGINAL_REVISION` for the duration of the
 compile.  They are also written to `HEAD` and `ORIG_HEAD` in the root of the
