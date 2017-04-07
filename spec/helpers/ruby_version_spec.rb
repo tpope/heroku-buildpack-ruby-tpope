@@ -28,6 +28,14 @@ describe "RubyVersion" do
     end
   end
 
+  it "does not include patchlevels when the patchlevel is negative for download" do
+    ruby_version = LanguagePack::RubyVersion.new("ruby-2.0.0-p-1")
+    expect(ruby_version.version_for_download).to eq("ruby-2.0.0")
+
+    ruby_version = LanguagePack::RubyVersion.new("ruby-2.4.0-p-1")
+    expect(ruby_version.version_for_download).to eq("ruby-2.4.0")
+  end
+
   it "correctly sets ruby version for bundler specified versions" do
     Hatchet::App.new("mri_193").in_directory do |dir|
       ruby_version   = LanguagePack::RubyVersion.new(@bundler.install.ruby_version, is_new: true)
@@ -98,7 +106,7 @@ describe "RubyVersion" do
     error_klass      = LanguagePack::Helpers::BundlerWrapper::GemfileParseError
     Hatchet::App.new("bad_gemfile_on_platform").in_directory do |dir|
       @bundler       = LanguagePack::Helpers::BundlerWrapper.new().install
-      expect {LanguagePack::RubyVersion.new(@bundler.ruby_version)}.to raise_error(error_klass, /#{Regexp.escape(bundle_error_msg)}/)
+      expect { LanguagePack::RubyVersion.new(@bundler.ruby_version) }.to raise_error(error_klass, /#{Regexp.escape(bundle_error_msg)}/)
     end
   end
 end
